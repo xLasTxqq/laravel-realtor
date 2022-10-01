@@ -4,32 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
 class Application extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
-        'fullname',
-        'number',
-        'dateapplication',
-        'numberhouse',
-        'numberflat',
-        'comment1',
+        'full_name',
+        'phone_number',
+        'client_comment',
         'status',
-        'datemeeting',
-        'comment2',
-        'agreedate',
-        'idflat ',
-    ];
-
-    protected $hidden = [
+        'date_meeting',
+        'manager_comment',
+        'date_of_purchase',
+        'appartment_id',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-//        'agreedate' => 'date',
     ];
+
+    public function appartment()
+    {
+        return $this->belongsTo(Appartment::class,'appartment_id','id');
+    }
 }

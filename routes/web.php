@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\AppartmentController;
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\Controller as ControllerAlias;
+use App\Http\Controllers\ApplicationController2;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FlatController;
 use Illuminate\Support\Facades\Route;
@@ -17,37 +18,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+// Route::get('/', [FlatController::class, 'all']);
 
-Route::get('/', [FlatController::class, 'all']);
+Route::get('/', [AppartmentController::class, 'index'])->name('appartment.index');
 
-Route::get('/applications',[ApplicationController::class,'all'])
-    ->middleware('auth')
-    ->name('applications');
+Route::get('/application/create/{appartment}',[ApplicationController2::class,'create'])->name('application.create');
+Route::post('/application/store',[ApplicationController2::class,'store'])->name('application.store');
+// Route::resource('application', ApplicationController2::class)->only(['create', 'store'])->scoped(['application'=>'id']);
 
-Route::get('/addflat', [FlatController::class, 'create'])
-    ->middleware('auth')
-    ->name('addflat');
+Route::middleware('auth')->group(function () {
 
-Route::get('/addapplication', [ApplicationController::class, 'create'])
-    ->middleware('auth')
-    ->name('addapplication');
+    Route::resource('application', ApplicationController2::class)
+        ->except(['create', 'store','show']);
 
-Route::post('/addflat', [FlatController::class, 'add'])
-    ->middleware('auth');
+    Route::post('/logout', [AuthController::class, 'destroy'])
+        ->name('logout');
 
-Route::post('/addapplication', [ApplicationController::class, 'add'])
-    ->middleware('auth');
+    Route::resource('appartment', AppartmentController::class)
+        ->except(['index','show']);
+});
 
-Route::get('/login', [AuthController::class, 'create'])
-    ->middleware('guest')
-    ->name('login');
-
-Route::post('/logout', [AuthController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
-
-Route::post('/login', [AuthController::class, 'store'])
+Route::resource('/login', AuthController::class)
+    ->only(['index', 'store'])
     ->middleware('guest');
+
+
+
+
+// Route::get('/applications', [ApplicationController::class, 'all'])
+//     ->middleware('auth')
+//     ->name('applications');
+
+// Route::get('/addflat', [FlatController::class, 'create'])
+//     ->middleware('auth')
+//     ->name('addflat');
+
+// Route::get('/addapplication', [ApplicationController::class, 'create'])
+//     ->middleware('auth')
+//     ->name('addapplication');
+
+// Route::post('/addflat', [FlatController::class, 'add'])
+//     ->middleware('auth');
+
+// Route::post('/addapplication', [ApplicationController::class, 'add'])
+//     ->middleware('auth');

@@ -38,19 +38,19 @@
                 </li>
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="{{route('login.index')}}">Login</a>
                 </li>
                 @endguest
                 @auth
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('applications')}}">Applications</a>
+                    <a class="nav-link" href="{{route('application.index')}}">Applications</a>
                 </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/addflat">AddFlat</a>
+                    <a class="nav-link" href="{{route('appartment.create')}}">Add appartment</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/addapplication">AddApplication</a>
-                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="{{route('application.create',1)}}">Create application</a>
+                </li> -->
                 <form class="nav-item" method="POST" action="{{ route('logout') }}">
                     @csrf
 
