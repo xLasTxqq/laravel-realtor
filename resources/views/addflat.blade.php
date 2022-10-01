@@ -4,49 +4,55 @@ AddFlat
 @endsection
 @section('content')
 
+@if(request()->route()->action['as']=='appartment.create')
 <form method="POST" action="{{route('appartment.store')}}" class="d-flex flex-column align-items-center w-75 py-5">
     <h1 class="mb-5">ADD APPARTMENT</h1>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-        <strong>{{ $error }}</strong>
-        @endforeach
-    </div>
-    @endif
-    @csrf
-    <div class="mb-3 w-100">
-        <label for="Input1" class="form-label">Number house</label>
-        <input required type="text" name="house_number" class="form-control text-center" id="Input1">
-    </div>
-    <div class="mb-3 w-100">
-        <label for="Input2" class="form-label">Floor</label>
-        <input required name="floor" type="number" step="0.5" class="form-control text-center" id="Input2">
-    </div>
-    <div class="mb-3 w-100">
-        <label for="Input3" class="form-label">Appartment number</label>
-        <input required name="appartment_number" type="number" class="form-control text-center" id="Input3">
-    </div>
-    <div class="mb-3 w-100">
-        <label for="Input4" class="form-label">Number of rooms</label>
-        <input required name="number_of_rooms" type="number" class="form-control text-center" id="Input4">
-    </div>
-    <div class="mb-3 w-100">
-        <label for="Input5" class="form-label">Apartment area</label>
-        <input required name="apartment_area" type="number" step="0.1" class="form-control text-center" id="Input5">
-    </div>
-    <div class="mb-3 w-100">
-        <label for="Input6" class="form-label">Living space</label>
-        <input required name="living_space" type="number" step="0.1" class="form-control text-center" id="Input6">
-    </div>
-    <div class="mb-3 w-100">
-        <label for="Input7" class="form-label">Price</label>
-        <input required name="price" type="number" step="0.1" class="form-control text-center" id="Input7">
-    </div>
-    <div class="mb-3 w-100">
-        <label for="Input9" class="form-label">Currency</label>
-        <input required name="currency" type="text" class="form-control text-center" id="Input8">
-    </div>
-    <!-- 
+    @elseif(request()->route()->action['as']=='appartment.edit')
+    <form method="POST" action="{{route('appartment.update',$appartment->id)}}" class="d-flex flex-column align-items-center w-75 py-5">
+        <h1 class="mb-5">UPDATE APPARTMENT</h1>
+        @method('PATCH')
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+            <strong>{{ $error }}</strong>
+            @endforeach
+        </div>
+        @endif
+        @csrf
+        <div class="mb-3 w-100">
+            <label for="Input1" class="form-label">Number house</label>
+            <input required type="text" name="house_number" class="form-control text-center" value="{{!empty($appartment)?$appartment->house_number:old('house_number')}}" id="Input1">
+        </div>
+        <div class="mb-3 w-100">
+            <label for="Input2" class="form-label">Floor</label>
+            <input required name="floor" type="number" step="0.5" class="form-control text-center" value="{{!empty($appartment)?$appartment->floor:old('floor')}}" id="Input2">
+        </div>
+        <div class="mb-3 w-100">
+            <label for="Input3" class="form-label">Appartment number</label>
+            <input required name="appartment_number" type="number" class="form-control text-center" value="{{!empty($appartment)?$appartment->appartment_number:old('appartment_number')}}" id="Input3">
+        </div>
+        <div class="mb-3 w-100">
+            <label for="Input4" class="form-label">Number of rooms</label>
+            <input required name="number_of_rooms" type="number" class="form-control text-center" value="{{!empty($appartment)?$appartment->number_of_rooms:old('number_of_rooms')}}" id="Input4">
+        </div>
+        <div class="mb-3 w-100">
+            <label for="Input5" class="form-label">Apartment area</label>
+            <input required name="apartment_area" type="number" step="0.1" class="form-control text-center" value="{{!empty($appartment)?$appartment->apartment_area:old('apartment_area')}}" id="Input5">
+        </div>
+        <div class="mb-3 w-100">
+            <label for="Input6" class="form-label">Living space</label>
+            <input required name="living_space" type="number" step="0.1" class="form-control text-center" value="{{!empty($appartment)?$appartment->living_space:old('living_space')}}" id="Input6">
+        </div>
+        <div class="mb-3 w-100">
+            <label for="Input7" class="form-label">Price</label>
+            <input required name="price" type="number" step="0.1" class="form-control text-center" value="{{!empty($appartment)?$appartment->price:old('price')}}" id="Input7">
+        </div>
+        <div class="mb-3 w-100">
+            <label for="Input9" class="form-label">Currency</label>
+            <input required name="currency" type="text" class="form-control text-center" value="{{!empty($appartment)?$appartment->currency:old('currency')}}" id="Input8">
+        </div>
+        <!-- 
         <div class="mb-3 w-100">
         <label for="Input8" class="form-label w-75">Status</label>
         <select required id="Input8" name="status" class="form-select text-center px-5" aria-label="Default select example">
@@ -56,7 +62,7 @@ AddFlat
             <option value="Purchased">Purchased</option>
         </select>
         </div> -->
-<!-- 
+        <!-- 
     <div class="mb-3 w-100 d-none" id="booked">
         <label for="Input9" class="form-label">Booked before</label>
         <input type="date" name="booked" class="form-control text-center datecenter" id="Input9" aria-describedby="emailHelp">
@@ -71,12 +77,16 @@ AddFlat
         <label for="Input11" class="form-label">Purchased phone number</label>
         <input type="tel" name="purchasedphone" pattern="[+]{1}[0-9]{1}[(]{1}[0-9]{3}[)]{1}[0-9]{3}-[0-9]{4}" class="form-control text-center" id="Input11" aria-describedby="emailHelp">
     </div> -->
-    @if (Session::has('successed'))
-    <div class="alert alert-success">{{ Session::get('successed') }}</div>
-    @endif
-    <button type="submit" class="btn btn-primary w-50 mt-3">Add</button>
-</form>
-<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" type="text/javascript"></script>
+        @if (Session::has('successed'))
+        <div class="alert alert-success">{{ Session::get('successed') }}</div>
+        @endif
+        @if(request()->route()->action['as']=='appartment.create')
+        <button type="submit" class="btn btn-primary w-50 mt-3">Add</button>
+        @elseif(request()->route()->action['as']=='appartment.edit')
+        <button type="submit" class="btn btn-primary w-50 mt-3">Update</button>
+        @endif
+    </form>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.js" type="text/javascript"></script>
 <script>
     let select = document.getElementById('Input8');
@@ -116,4 +126,4 @@ AddFlat
 
     $(inputpurchased2).mask("+7(999)999-9999");
 </script> -->
-@endsection
+    @endsection

@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="{{route('appartment.index')}}">Main</a>
                 </li>
                 @guest
                 <li class="nav-item">
