@@ -15,7 +15,7 @@ Login
         @endif
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input type="login" class="form-control" name="login" id="exampleInputEmail1" required aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your login with anyone else.</div>
+        <div id="emailHelp" class="form-text">Login: manager , Password: web2021</div>
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
