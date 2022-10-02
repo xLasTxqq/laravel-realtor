@@ -14,15 +14,10 @@ class ApplicationRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname' => 'required|string',
-            'number' => 'required|string',
-            'dateapplication' => 'required|date',
-            'numberhouse' => 'required|integer',
-            'numberflat' => 'required|integer',
-            'comment1' => 'required|string',
-            'status' => 'required|string',
-            'datemeeting' => ['required_if:status,Processed','nullable','date'],
-            'comment2' => ['required_if:status,Processed','nullable','string'],
+            'full_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'client_comment' => 'required|string|max:1000',
+            'appartment_id'=>'required|exists:appartments,id'
         ];
     }
 }
