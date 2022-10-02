@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Appartment;
+use App\Models\Application;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -18,11 +20,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         DB::table('users')->insert([
             'login' => 'manager',
-//            'email' => 'admin'.'@gmail.com',
             'password' => Hash::make('web2021'),
-//            'role'=> 1,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
+        Appartment::factory(50)->create();
+        Application::factory(100)->create();
     }
 }
