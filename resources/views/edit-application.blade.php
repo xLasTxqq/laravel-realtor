@@ -22,10 +22,6 @@ Create application
         <label for="Input2" class="form-label">Phone number</label>
         <input readonly required value="{{$application->phone_number}}" type="tel" class="form-control text-center" placeholder="+_(___)___-____" pattern="[+]{1}[0-9]{1}[(]{1}[0-9]{3}[)]{1}[0-9]{3}-[0-9]{4}" id="Input2">
     </div>
-    <!-- <div class="mb-3 w-100">
-            <label for="Input3" class="form-label">Date of the application</label>
-            <input required type="date" name="dateapplication" class="form-control text-center datecenter" id="Input3">
-        </div> -->
     <div class="mb-3 w-100">
         <label for="Input4" class="form-label">Number house</label>
         <input required type="text" readonly value="{{$application->appartment->house_number}}" class="form-control text-center" id="Input4">
@@ -62,31 +58,5 @@ Create application
     @endif
     <button type="submit" class="btn btn-primary w-50 mt-3">Update</button>
 </form>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" type="text/javascript"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.js" type="text/javascript"></script> -->
-<script>
-    let select = document.getElementById('Input7');
-    let processed1 = document.getElementById('processed1');
-    let processed2 = document.getElementById('processed2');
-    let inputprocessed1 = document.getElementById('Input8');
-    let inputprocessed2 = document.getElementById('Input9');
-
-    select.addEventListener('change', () => {
-        if (select.value === "processed") {
-            processed1.classList.remove("d-none");
-            processed2.classList.remove("d-none");
-            inputprocessed1.required = true;
-            inputprocessed2.required = true;
-        }
-        else {
-            processed1.classList.add("d-none");
-            processed2.classList.add("d-none");
-            inputprocessed1.required = false;
-            inputprocessed2.required = false;
-        }
-    })
-
-    // $('#Input2').mask("+9(999)999-9999");
-</script>
+<script src="{{asset('/js/edit-application.js')}}"></script>
 @endsection

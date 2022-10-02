@@ -13,5 +13,5 @@
 <br>
 
 ## One line command
-<h3><i>sudo chmod -R 777 . && cp -ri ./.env.example ./.env && docker compose up --build -d && docker exec -it laravel-realtor-1121-php-1 bash -c "composer install && php artisan key:generate && php artisan storage:link && php artisan migrate && php artisan db:seed"<i></h3>
+<h3><i>mkdir ./tmp/mysql -p && sudo chmod -R 777 . && cp -ri ./.env.example ./.env && docker compose up --build -d && docker exec -it laravel-realtor-1121-php-1 bash -c "composer install && php artisan key:generate && php artisan storage:link && php artisan migrate && php artisan db:seed"<i></h3>
 

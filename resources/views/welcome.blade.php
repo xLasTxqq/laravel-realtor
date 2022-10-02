@@ -4,7 +4,7 @@ Main
 @endsection
 @section('content')
 
-<form class="mb-5" method="GET" action="/">
+<form class="mb-5" method="GET" action="{{route('appartment.index')}}">
     <h1>Filters</h1>
     <div class="d-flex justify-content-center align-items-center vw-100 px-5">
         <div class="mb-3 w-100">
@@ -99,7 +99,7 @@ Main
     </tbody>
 </table>
 {{$appartments}}
-<div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+<!-- <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
     Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-</div>
+</div> -->
 @endsection

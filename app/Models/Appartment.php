@@ -20,11 +20,6 @@ class Appartment extends Model
         'currency'
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function applications()
     {
         return $this->hasMany(Application::class, 'appartment_id','id');

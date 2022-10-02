@@ -20,11 +20,6 @@ class Application extends Model
         'appartment_id',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function appartment()
     {
         return $this->belongsTo(Appartment::class,'appartment_id','id');

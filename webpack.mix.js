@@ -15,3 +15,14 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+mix.js('resources/js/edit-application.js', 'public/js/edit-application.js');
+mix.scripts([
+    'resources/js/jquery.min.js',
+    'resources/js/jquery.maskedinput.js',
+    'resources/js/create-application.js'
+], 'public/js/create-application.js');
+mix.styles([
+    'resources/css/css-font.css',
+    'resources/css/master.css',
+    'resources/css/bootstrap.min.css',
+],'public/css/master.css')

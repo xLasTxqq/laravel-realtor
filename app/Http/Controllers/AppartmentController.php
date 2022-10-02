@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FlatRequest;
+use App\Http\Requests\AppartmentRequest;
 use App\Models\Appartment;
 use Illuminate\Http\Request;
 
@@ -30,21 +30,6 @@ class AppartmentController extends Controller
                 if (!empty($request->floor)) $query->where('floor', $request->floor);
             })->paginate(8);
         return view('welcome', compact('appartments'));
-        // $rooms=$request->rooms;
-        // $numberflat=$request->numberflat;
-        // $floor=$request->floor;
-
-        // $flats = Auth::guest() ? Flat::where('status','Free')->where(function ($query) use ($rooms,$numberflat,$floor) {
-        //     if(trim($rooms)!=='') $query->where('rooms',$rooms);
-        //     if(trim($numberflat)!=='') $query->where('numberflat',$numberflat);
-        //     if(trim($floor)!=='') $query->where('floor',$floor);
-        // })->paginate(8) : Flat::where(function ($query) use ($rooms,$numberflat,$floor) {
-        //     if(trim($rooms)!=='') $query->where('rooms',$rooms);
-        //     if(trim($numberflat)!=='') $query->where('numberflat',$numberflat);
-        //     if(trim($floor)!=='') $query->where('floor',$floor);
-        // })->paginate(8);
-        // return view('welcome',['flats'=>$flats]);
-        // return view('welcome',['flats'=>[]]);
     }
 
     /**
@@ -54,7 +39,7 @@ class AppartmentController extends Controller
      */
     public function create()
     {
-        return view('addflat');
+        return view('create-appartment');
     }
 
     /**
@@ -63,7 +48,7 @@ class AppartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FlatRequest $request)
+    public function store(AppartmentRequest $request)
     {
         Appartment::create($request->validated());
         return redirect()->route('appartment.create')->with('successed', 'Apartment added successfully');
@@ -88,7 +73,7 @@ class AppartmentController extends Controller
      */
     public function edit(Appartment $appartment)
     {
-        return view('addflat', compact('appartment'));
+        return view('create-appartment', compact('appartment'));
     }
 
     /**
@@ -98,7 +83,7 @@ class AppartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FlatRequest $request, Appartment $appartment)
+    public function update(AppartmentRequest $request, Appartment $appartment)
     {
         $appartment->update($request->validated());
         return redirect()->route('appartment.edit', $appartment->id)->with('successed', 'Apartment updated successfully');
